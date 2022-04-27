@@ -47,6 +47,7 @@ public class Traffic implements ActionListener, Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
+		/*
 		Semi testSemi = new Semi(10, 20);
 		road.addCar(testSemi);
 		SUV testSUV = new SUV(10, 170);
@@ -54,6 +55,7 @@ public class Traffic implements ActionListener, Runnable {
 		Sports testSports = new Sports(10, 320);
 		road.addCar(testSports);
 		frame.repaint();
+		*/
 	}
 
 	public static void main(String[] args) {
@@ -62,7 +64,60 @@ public class Traffic implements ActionListener, Runnable {
 
 	@Override
 	public void actionPerformed(ActionEvent event) {
-	
+		if (event.getSource().equals(start)) {
+			if (running == false) {
+				running = true;
+				Thread t = new Thread(this);
+				t.start();
+			}
+		}
+		if (event.getSource().equals(stop)) {
+			running = false;
+		}
+		if (event.getSource().equals(semi)) {
+			Semi semi = new Semi(0, 20);
+			road.addCar(semi);
+			for (int x = 0; x < road.ROAD_WIDTH; x = x + 20) {
+				for (int y = 40; y < 480; y = y + 120) {
+					semi.setX(x);
+					semi.setY(y);
+					if (road.collision(x, y, semi.getWidth(), semi) == false) {
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+		
+		if (event.getSource().equals(suv)) {
+			SUV suv = new SUV(0, 20);
+			road.addCar(suv);
+			for (int x = 0; x < road.ROAD_WIDTH; x = x + 20) {
+				for (int y = 40; y < 480; y = y + 120) {
+					suv.setX(x);
+					suv.setY(y);
+					if (road.collision(x, y, suv.getWidth(), suv) == false) {
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
+		
+		if (event.getSource().equals(sports)) {
+			Sports sports = new Sports(0, 20);
+			road.addCar(sports);
+			for (int x = 0; x < road.ROAD_WIDTH; x = x + 20) {
+				for (int y = 40; y < 480; y = y + 120) {
+					sports.setX(x);
+					sports.setY(y);
+					if (road.collision(x, y, sports.getWidth(), sports) == false) {
+						frame.repaint();
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	@Override
@@ -71,7 +126,7 @@ public class Traffic implements ActionListener, Runnable {
 			road.step();
 			frame.repaint();
 			try {
-				Thread.sleep(500);
+				Thread.sleep(100);
 			}
 			catch (Exception ex) {
 				ex.printStackTrace();

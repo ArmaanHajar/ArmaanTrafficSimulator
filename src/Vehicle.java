@@ -28,4 +28,17 @@ public class Vehicle {
 	public int getSpeed() {
 		return speed;
 	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setY(int newy) {
+		y = newy;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+
 }
