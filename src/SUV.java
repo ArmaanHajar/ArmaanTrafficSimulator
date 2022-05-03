@@ -3,14 +3,14 @@ import java.awt.Graphics;
 
 public class SUV extends Vehicle {
 	
-	public SUV(int newx, int newy) {
+	public SUV(int newx, int newy) { // sets characteristics of suv
 		super(newx, newy);
 		width = 60;
 		height = 30;
 		speed = 8;
 	}
 	
-	public void paintMe(Graphics g) {
+	public void paintMe(Graphics g) { // sets color of suv
 		g.setColor(Color.GREEN);
 		g.fillRect(x, y, width, height);
 	}

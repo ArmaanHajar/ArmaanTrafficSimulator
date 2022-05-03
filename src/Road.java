@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 public class Road extends JPanel {
 	
+	// creates roadway
 	final int LANE_HEIGHT = 120;
 	final int ROAD_WIDTH = 800;
 	ArrayList<Vehicle> cars = new ArrayList<Vehicle>();
@@ -16,11 +17,11 @@ public class Road extends JPanel {
 		super();
 	}
 	
-	public void addCar(Vehicle v) {
+	public void addCar(Vehicle v) { // adds cars when called
 		cars.add(v);
 	}
 	
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) { // paints and creates lanes 
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
@@ -36,7 +37,7 @@ public class Road extends JPanel {
 		}
 	}	
 	
-	public void step() {
+	public void step() { // moves cars forward, a.k.a. "stepping"
 		for (int a = 0; a < cars.size(); a++) {
 			Vehicle v = cars.get(a);
 			if (collision(v.getX() + v.getSpeed(), v.getY(), v) == false) { // theres no collision
@@ -59,7 +60,7 @@ public class Road extends JPanel {
 		}
 	}
 	
-	public boolean collision(int x, int y, Vehicle v) {
+	public boolean collision(int x, int y, Vehicle v) { // collision prevention
 		for (int a = 0; a < cars.size(); a++) {
 			Vehicle u = cars.get(a);
 			if (y == u.getY()) { // if i'm in the same lane
@@ -74,11 +75,11 @@ public class Road extends JPanel {
 		return false;
 	}
 	
-	public int getCarCount() {
+	public int getCarCount() { // gets car count
 		return carCount;
 	}
 	
-	public void resetCarCount() {
+	public void resetCarCount() { // resets car count when called
 		carCount = 0;
 	}
 }
